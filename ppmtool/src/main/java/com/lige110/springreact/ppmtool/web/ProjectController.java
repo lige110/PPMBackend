@@ -34,6 +34,7 @@ public class ProjectController {
         this.mapValidationErrorService = mapValidationErrorService;
     }
 
+
     @PostMapping("")
     public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result){
 
