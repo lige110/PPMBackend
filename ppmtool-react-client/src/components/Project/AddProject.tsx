@@ -1,4 +1,8 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { createProject } from "../../actions/projectActions";
+import { Project } from "../../model/Project";
 
 interface IMyComponentState {
   projectName: string;
@@ -8,7 +12,11 @@ interface IMyComponentState {
   end_date: string;
 }
 
-class AddProject extends React.Component<{}, IMyComponentState> {
+class AddProject extends React.Component<any, IMyComponentState> {
+  static propTypes: {
+    createProject: PropTypes.Validator<(...args: any[]) => any>;
+  };
+
   constructor(props: any) {
     super(props);
 
@@ -35,7 +43,7 @@ class AddProject extends React.Component<{}, IMyComponentState> {
   onSubmit(e: FormEvent<HTMLFormElement>): void {
     e.preventDefault();
 
-    const project = {
+    const newProject: Project = {
       projectName: this.state.projectName,
       projectIdentifier: this.state.projectIdentifier,
       description: this.state.description,
@@ -43,7 +51,8 @@ class AddProject extends React.Component<{}, IMyComponentState> {
       end_date: this.state.end_date,
     };
 
-    console.log(project);
+    console.log(newProject);
+    this.props.createProject(newProject, this.props.history);
   }
 
   render() {
@@ -118,4 +127,8 @@ class AddProject extends React.Component<{}, IMyComponentState> {
   }
 }
 
-export default AddProject;
+AddProject.propTypes = {
+  createProject: PropTypes.func.isRequired,
+};
+
+export default connect(null, { createProject })(AddProject);
