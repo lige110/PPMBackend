@@ -1,12 +1,9 @@
-import { act } from "react-dom/test-utils";
+import { AnyAction } from "redux";
 import { GET_ERRORS } from "../actions/types";
 
 const initialState = {};
 
-const errorReducer = (
-  state = initialState,
-  action: { type: any; payload: any }
-) => {
+const errorReducer = (state = initialState, action: AnyAction) => {
   switch (action.type) {
     case GET_ERRORS:
       return action.payload;
