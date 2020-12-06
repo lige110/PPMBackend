@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { GET_ALLPROJECTS, GET_PROJECT } from "../actions/types";
+import { DELETE_PROJECT, GET_ALLPROJECTS, GET_PROJECT } from "../actions/types";
 import { Project } from "../model/Project";
 
 interface ProjectState {
@@ -19,6 +19,13 @@ const projectReducer = (state = initialState, action: AnyAction) => {
     case GET_ALLPROJECTS:
       //   console.log("Project reducer worked");
       return { ...state, projectList: action.payload };
+    case DELETE_PROJECT:
+      return {
+        ...state,
+        projectList: state.projectList.filter(
+          (project) => project.projectIdentifier !== action.payload
+        ),
+      };
     default:
       return state;
   }

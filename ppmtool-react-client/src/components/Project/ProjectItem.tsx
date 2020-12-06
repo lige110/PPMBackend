@@ -1,12 +1,17 @@
 import React from "react";
 import { Project } from "../../model/Project";
 import { Link } from "react-router-dom";
-
+import { connect } from "react-redux";
+import { deleteProject } from "../../actions/projectActions";
 interface Props {
   project: Project;
+  deleteProject: any;
 }
 
 class ProjectItem extends React.Component<Props, any> {
+  onDeleteClick(id: string) {
+    this.props.deleteProject(id);
+  }
   render() {
     const project: Project = this.props.project;
     return (
@@ -32,11 +37,16 @@ class ProjectItem extends React.Component<Props, any> {
                     <i className="fa fa-edit pr-1"> Update Project Info</i>
                   </li>
                 </Link>
-                <Link to="">
-                  <li className="list-group-item delete">
-                    <i className="fa fa-minus-circle pr-1"> Delete Project</i>
-                  </li>
-                </Link>
+
+                <li
+                  className="list-group-item delete"
+                  onClick={this.onDeleteClick.bind(
+                    this,
+                    project.projectIdentifier
+                  )}
+                >
+                  <i className="fa fa-minus-circle pr-1"> Delete Project</i>
+                </li>
               </ul>
             </div>
           </div>
@@ -46,4 +56,4 @@ class ProjectItem extends React.Component<Props, any> {
   }
 }
 
-export default ProjectItem;
+export default connect(null, { deleteProject })(ProjectItem);
