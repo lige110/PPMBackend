@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { GET_ALLPROJECTS } from "../actions/types";
+import { GET_ALLPROJECTS, GET_PROJECT } from "../actions/types";
 import { Project } from "../model/Project";
 
 interface ProjectState {
@@ -14,6 +14,8 @@ const initialState: ProjectState = {
 
 const projectReducer = (state = initialState, action: AnyAction) => {
   switch (action.type) {
+    case GET_PROJECT:
+      return { ...state, project: action.payload };
     case GET_ALLPROJECTS:
       //   console.log("Project reducer worked");
       return { ...state, projectList: action.payload };

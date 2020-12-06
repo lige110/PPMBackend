@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import CreateProjectButton from "./Project/CreateProjectButton";
 import ProjectItem from "./Project/ProjectItem";
 import { getProjects } from "../actions/projectActions";
 import { connect } from "react-redux";
+import { Project } from "../model/Project";
 
 class Dashborad extends React.Component<any, any> {
   componentDidMount() {
@@ -11,6 +12,8 @@ class Dashborad extends React.Component<any, any> {
   }
 
   render() {
+    const projects = this.props.projects.projectList;
+
     return (
       <div className="projects">
         <div className="container">
@@ -21,8 +24,9 @@ class Dashborad extends React.Component<any, any> {
               <CreateProjectButton />
               <br />
               <hr />
-
-              <ProjectItem />
+              {projects.map((project: Project) => (
+                <ProjectItem key={project.id} project={project} />
+              ))}
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ERRORS, GET_ALLPROJECTS } from "./types";
+import { GET_ERRORS, GET_ALLPROJECTS, GET_PROJECT } from "./types";
 import { Project } from "../model/Project";
 // import { AnyAction } from "redux";
 
@@ -8,9 +8,14 @@ export const createProject = (project: Project, history: string[]) => async (
   dispatch: any
 ) => {
   try {
+    console.log("create projects action dispatched!");
     const res = await axios.post("http://localhost:8080/api/project", project);
 
     history.push("/dashboard");
+    dispatch({
+      type: GET_ERRORS,
+      payload: {},
+    });
   } catch (err) {
     dispatch({
       type: GET_ERRORS,
@@ -32,5 +37,24 @@ export const getProjects = (history: string[]) => async (dispatch: any) => {
     history.push("/dashboard");
   } catch (err) {
     console.error(err);
+  }
+};
+
+export const getProjectById = (id: string, history: string[]) => async (
+  dispatch: any
+) => {
+  try {
+    // console.log("get projects action dispatched!");
+    const res: any = await axios.get(`http://localhost:8080/api/project/${id}`);
+    dispatch({
+      type: GET_PROJECT,
+      payload: res.data,
+    });
+  } catch (err) {
+    history.push("/dashboard");
+    // dispatch({
+    //   type: GET_ERRORS,
+    //   payload: err.response.data,
+    // });
   }
 };
