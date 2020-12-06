@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 import CreateProjectButton from "./Project/CreateProjectButton";
 import ProjectItem from "./Project/ProjectItem";
+import { getProjects } from "../actions/projectActions";
+import { connect } from "react-redux";
 
-class Dashborad extends Component {
+class Dashborad extends React.Component<any, any> {
+  componentDidMount() {
+    // console.log("Dashboard mounted!");
+    this.props.getProjects(this.props.history);
+  }
+
   render() {
     return (
       <div className="projects">
@@ -24,4 +31,8 @@ class Dashborad extends Component {
   }
 }
 
-export default Dashborad;
+const mapStateToProps = (state: any) => ({
+  projects: state.projects,
+});
+
+export default connect(mapStateToProps, { getProjects })(Dashborad);
