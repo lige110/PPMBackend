@@ -1,7 +1,9 @@
 package com.lige110.springreact.ppmtool.services;
 
+import com.lige110.springreact.ppmtool.domain.Backlog;
 import com.lige110.springreact.ppmtool.domain.Project;
 import com.lige110.springreact.ppmtool.exceptions.ProjectIdException;
+import com.lige110.springreact.ppmtool.repositories.BacklogRepository;
 import com.lige110.springreact.ppmtool.repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,15 +13,29 @@ public class ProjectService {
 
 
     private ProjectRepository projectRepository;
+    private BacklogRepository backlogRepository;
 
-    public ProjectService(@Autowired ProjectRepository projectRepository) {
+    public ProjectService(@Autowired ProjectRepository projectRepository,
+                          @Autowired BacklogRepository backlogRepository) {
         this.projectRepository = projectRepository;
+        this.backlogRepository = backlogRepository;
     }
 
     public Project saveOrUpdateProject(Project project){
-
         try {
-            project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
+            String identifier = project.getProjectIdentifier().toUpperCase();
+            project.setProjectIdentifier(identifier);
+
+            if(project.getId() == null){
+                Backlog backlog = new Backlog();
+                project.setBacklog(backlog);
+                backlog.setProject(project);
+                backlog.setProjectIdentifier(identifier);
+
+            }else {
+                project.setBacklog(backlogRepository.findByProjectIdentifier(identifier));
+            }
+
             return projectRepository.save(project);
 
         }catch (Exception e){
@@ -31,7 +47,7 @@ public class ProjectService {
 
         Project project = projectRepository.findByProjectIdentifier(identifier.toUpperCase());
         if(project == null){
-            throw new ProjectIdException("Project does not exist!");
+            throw new ProjectIdException("Project "+ identifier +"does not exist!");
         }
         return project;
     }
