@@ -19,16 +19,16 @@ public class ProjectTask {
     private String status;
     private Integer priority;
     private Date dueDate;
-    //ManyToOne with Backlog
+
 
     @Column(updatable = false)
     private String projectIdentifier;
     private Date create_At;
     private Date update_At;
 
-
+    //ManyToOne with Backlog
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-    @JoinColumn(name="backlog_id", updatable = false, nullable = false)
+    @JoinColumn(name="backlog_id", updatable = false, nullable = false)  // what is joinColumn????
     @JsonIgnore
     private Backlog backlog;
 
@@ -113,6 +113,14 @@ public class ProjectTask {
 
     public void setUpdate_At(Date update_At) {
         this.update_At = update_At;
+    }
+
+    public Backlog getBacklog() {
+        return backlog;
+    }
+
+    public void setBacklog(Backlog backlog) {
+        this.backlog = backlog;
     }
 
     @PrePersist
