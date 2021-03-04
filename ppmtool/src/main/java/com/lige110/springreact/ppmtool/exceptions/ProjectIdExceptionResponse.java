@@ -1,3 +1,6 @@
+/*
+    Literally the return response, Java object converted into a JSON object
+ */
 package com.lige110.springreact.ppmtool.exceptions;
 
 public class ProjectIdExceptionResponse {
