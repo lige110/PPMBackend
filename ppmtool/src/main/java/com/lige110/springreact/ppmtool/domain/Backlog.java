@@ -14,7 +14,7 @@ public class Backlog {
     private Integer PTSequence =0;
     private String projectIdentifier;
 
-    // oneToone with project
+    // one To one with project
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "project_id",nullable = false)
@@ -22,7 +22,7 @@ public class Backlog {
     private Project project;
 
     //OneToMany project tasks
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "backlog")
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "backlog", orphanRemoval = true)
     private List<ProjectTask> projectTasks = new ArrayList<>();
 
 

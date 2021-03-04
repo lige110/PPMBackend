@@ -79,8 +79,32 @@ public class ProjectTaskService {
         return projectTask;
     }
 
+    public ProjectTask updateByProjectTaskSequence(ProjectTask updatedTask, String backlog_id, String pt_id){
+
+        // pt_id can be invalid
+
+        // backlog_id can be invalid
+
+        // backlog_id and pt_id should be corresponding to each other
+
+
+
+        ProjectTask projectTask = this.findProjectTaskByPTSequence(backlog_id, pt_id);
+
+        projectTask = updatedTask;
+
+        return projectTaskRepository.save(projectTask);
+    }
+
     public  Iterable<ProjectTask> findAllProjectTasks(){
         return projectTaskRepository.findAll();
+    }
+
+    public void deleteByProjectSequence(String backlog_id, String pt_id){
+
+        ProjectTask projectTask = findProjectTaskByPTSequence(backlog_id,pt_id);
+
+        projectTaskRepository.delete(projectTask);
     }
 
 

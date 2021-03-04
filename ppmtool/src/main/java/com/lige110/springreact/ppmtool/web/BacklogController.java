@@ -1,6 +1,7 @@
 package com.lige110.springreact.ppmtool.web;
 
 
+import com.lige110.springreact.ppmtool.domain.Project;
 import com.lige110.springreact.ppmtool.domain.ProjectTask;
 import com.lige110.springreact.ppmtool.services.MapValidationErrorService;
 import com.lige110.springreact.ppmtool.services.ProjectTaskService;
@@ -53,4 +54,29 @@ public class BacklogController {
         return new ResponseEntity<>(projectTask,HttpStatus.OK);
     }
 
+
+    @PatchMapping("/{backlog_id}/{pt_id}")
+    public  ResponseEntity<?> updateProjectTask(@Valid @RequestBody ProjectTask projectTask, BindingResult result,
+                                                @PathVariable String backlog_id, @PathVariable String pt_id){
+
+        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
+        if(errorMap != null) return errorMap;
+
+        ProjectTask updatedTask =  projectTaskService.updateByProjectTaskSequence(projectTask,backlog_id,pt_id);
+
+        return new ResponseEntity<ProjectTask>(projectTask,HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{backlog_id}/{pt_id}")
+    public ResponseEntity<?> deleteProjectTask(@PathVariable String backlog_id, @PathVariable String pt_id){
+        backlog_id = backlog_id.toUpperCase();
+        pt_id = pt_id.toUpperCase();
+
+        projectTaskService.deleteByProjectSequence(backlog_id,pt_id);
+
+
+        return new ResponseEntity<>("Project Task in project '"+backlog_id+"' with sequence '"+pt_id+"' is deleted",HttpStatus.OK);
+
+
+    }
 }
