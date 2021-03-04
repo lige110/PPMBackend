@@ -3,6 +3,7 @@ package com.lige110.springreact.ppmtool.services;
 
 import com.lige110.springreact.ppmtool.domain.Backlog;
 import com.lige110.springreact.ppmtool.domain.ProjectTask;
+import com.lige110.springreact.ppmtool.exceptions.ProjectNotFoundException;
 import com.lige110.springreact.ppmtool.repositories.BacklogRepository;
 import com.lige110.springreact.ppmtool.repositories.ProjectTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,15 @@ public class ProjectTaskService {
 
 
     public ProjectTask addProjectTask(String projectIdentifier, ProjectTask projectTask){
-        // exceptions project not found
-
-        // PTs to be added to a specific project project != null BL exists
         projectIdentifier = projectIdentifier.toUpperCase();
+
+        // exceptions project not found
+        // PTs to be added to a specific project project != null BL exists
+
         Backlog backlog = backlogRepository.findByProjectIdentifier(projectIdentifier);
+        if(backlog == null){
+            throw new ProjectNotFoundException("Project with Identifier '"+ projectIdentifier +"' does not exits");
+        }
         // set the BL to Pt
         projectTask.setBacklog(backlog);
         // the project sequence should be like this IDPRO-1, IDPRO-2
@@ -46,6 +51,20 @@ public class ProjectTaskService {
 
 
         return projectTaskRepository.save(projectTask);
+    }
+
+    public Iterable<ProjectTask> findBacklogById(String id){
+
+        Backlog backlog = backlogRepository.findByProjectIdentifier(id);
+        if(backlog == null){
+            throw new ProjectNotFoundException("Project with ID: '"+id.toUpperCase()+"' does not exist.");
+        }
+
+        return projectTaskRepository.findByProjectIdentifierOrderByPriority(id);
+    }
+
+    public  Iterable<ProjectTask> findAllProjectTasks(){
+        return projectTaskRepository.findAll();
     }
 
 

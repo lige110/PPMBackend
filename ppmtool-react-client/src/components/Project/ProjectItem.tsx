@@ -3,6 +3,7 @@ import { Project } from "../../model/Project";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteProject } from "../../actions/projectActions";
+
 interface Props {
   project: Project;
   deleteProject: any;
@@ -13,7 +14,7 @@ class ProjectItem extends React.Component<Props, any> {
     this.props.deleteProject(id);
   }
   render() {
-    const project: Project = this.props.project;
+    const project: Project = this.props.project; // declare a const value from the props, used in the JSX
     return (
       <div className="container">
         <div className="card card-body bg-light mb-3">
