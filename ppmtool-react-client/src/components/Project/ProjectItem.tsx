@@ -28,7 +28,7 @@ class ProjectItem extends React.Component<Props, any> {
             </div>
             <div className="col-md-4 d-none d-lg-block">
               <ul className="list-group">
-                <Link to="">
+                <Link to={`/projectBoard/${project.projectIdentifier}`}>
                   <li className="list-group-item board">
                     <i className="fa fa-flag-checkered pr-1"> Project Board </i>
                   </li>
