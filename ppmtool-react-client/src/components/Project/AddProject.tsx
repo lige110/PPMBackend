@@ -1,5 +1,4 @@
 import React, { ChangeEvent, FormEvent } from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProject } from "../../actions/projectActions";
 import { Project } from "../../model/Project";
@@ -15,11 +14,6 @@ interface IMyComponentState {
 }
 
 class AddProject extends React.Component<any, IMyComponentState> {
-  //   static propTypes: {
-  //     createProject: PropTypes.Validator<(...args: any[]) => any>;
-  //     errors: PropTypes.Validator<object>;
-  //   };
-
   constructor(props: any) {
     super(props);
 
@@ -42,9 +36,7 @@ class AddProject extends React.Component<any, IMyComponentState> {
     }
   }
 
-  onChange(
-    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
-  ): void {
+  onChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
     const key = e.target.name;
     const value = e.target.value;
 

@@ -14,7 +14,7 @@ export const createProject = (project: Project, history: string[]) => async (
 ) => {
   try {
     console.log("create projects action dispatched!");
-    const res = await axios.post("/api/project", project);
+    await axios.post("/api/project", project);
 
     history.push("/dashboard");
     dispatch({
