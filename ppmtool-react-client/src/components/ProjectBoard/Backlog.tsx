@@ -1,17 +1,27 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import ProjectTask from "../../model/ProjectTask";
+import ProjectTaskItem from "./ProjectTasks/ProjectTaskItem";
 
-interface IMyComponentProps {
-  backlog_id: string;
-}
+// interface IMyComponentProps {
+//   backlog_id: string;
+//   getBacklog: any;
+// }
 
-interface IMyComponentState {}
-
-export default class Backlog extends React.Component<
-  IMyComponentProps,
-  IMyComponentState
-> {
+class Backlog extends React.Component<any, any> {
   render() {
+    const { projectTasks } = this.props;
+    // console.log(projectTasks);
+
+    const todoTasks = projectTasks.filter(
+      (projectTask: ProjectTask) => projectTask.status === "TO_DO"
+    );
+    const inprogressTasks = projectTasks.filter(
+      (projectTask: ProjectTask) => projectTask.status === "IN_PROGRESS"
+    );
+    const finishedTasks = projectTasks.filter(
+      (projectTask: ProjectTask) => projectTask.status === "DONE"
+    );
+
     return (
       <div className="container">
         <div className="row">
@@ -23,26 +33,12 @@ export default class Backlog extends React.Component<
             </div>
 
             {/* <!-- SAMPLE PROJECT TASK STARTS HERE --> */}
-            <div className="card mb-1 bg-light">
-              <div className="card-header text-primary">
-                ID: projectSequence -- Priority: priorityString
-              </div>
-              <div className="card-body bg-light">
-                <h5 className="card-title">project_task.summary</h5>
-                <p className="card-text text-truncate ">
-                  project_task.acceptanceCriteria
-                </p>
-                <Link
-                  to={`/updateProjectTask/${this.props.backlog_id}`}
-                  className="btn btn-primary"
-                >
-                  View / Update
-                </Link>
-
-                <button className="btn btn-danger ml-4">Delete</button>
-              </div>
-            </div>
-
+            {todoTasks.map((projectTask: ProjectTask) => (
+              <ProjectTaskItem
+                key={projectTask.projectSequence}
+                projectTask={projectTask}
+              />
+            ))}
             {/* <!-- SAMPLE PROJECT TASK ENDS HERE --> */}
           </div>
           <div className="col-md-4">
@@ -51,8 +47,14 @@ export default class Backlog extends React.Component<
                 <h3>In Progress</h3>
               </div>
             </div>
-            {/* <!-- SAMPLE PROJECT TASK STARTS HERE --> */}
 
+            {/* <!-- SAMPLE PROJECT TASK STARTS HERE --> */}
+            {inprogressTasks.map((projectTask: ProjectTask) => (
+              <ProjectTaskItem
+                key={projectTask.projectSequence}
+                projectTask={projectTask}
+              />
+            ))}
             {/* <!-- SAMPLE PROJECT TASK ENDS HERE --> */}
           </div>
           <div className="col-md-4">
@@ -61,8 +63,14 @@ export default class Backlog extends React.Component<
                 <h3>Done</h3>
               </div>
             </div>
-            {/* <!-- SAMPLE PROJECT TASK STARTS HERE --> */}
 
+            {/* <!-- SAMPLE PROJECT TASK STARTS HERE --> */}
+            {finishedTasks.map((projectTask: ProjectTask) => (
+              <ProjectTaskItem
+                key={projectTask.projectSequence}
+                projectTask={projectTask}
+              />
+            ))}
             {/* <!-- SAMPLE PROJECT TASK ENDS HERE --> */}
           </div>
         </div>
@@ -70,3 +78,5 @@ export default class Backlog extends React.Component<
     );
   }
 }
+
+export default Backlog;

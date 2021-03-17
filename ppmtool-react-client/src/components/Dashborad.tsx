@@ -6,13 +6,19 @@ import { connect } from "react-redux";
 import { Project } from "../model/Project";
 
 class Dashborad extends React.Component<any, any> {
+  componentWillMount() {
+    // console.log("Dashboard willl Mount!");
+    // this.props.getProjects(this.props.history);
+  }
   componentDidMount() {
-    // console.log("Dashboard mounted!");
+    // console.log("Dashboard Did Mount!");
     this.props.getProjects(this.props.history);
   }
 
   render() {
+    // console.log("DashBoard render here!");
     const projects = this.props.projects.projectList;
+    // console.log(`The projects is ${projects}`);
 
     return (
       <div className="projects">

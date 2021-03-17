@@ -4,6 +4,7 @@ package com.lige110.springreact.ppmtool.services;
 import com.lige110.springreact.ppmtool.domain.Backlog;
 import com.lige110.springreact.ppmtool.domain.ProjectTask;
 import com.lige110.springreact.ppmtool.exceptions.ProjectNotFoundException;
+import com.lige110.springreact.ppmtool.exceptions.ProjectTaskException;
 import com.lige110.springreact.ppmtool.repositories.BacklogRepository;
 import com.lige110.springreact.ppmtool.repositories.ProjectTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class ProjectTaskService {
         projectTask.setProjectIdentifier(projectIdentifier);
 
         //Initial priority when priority null
-        if(projectTask.getPriority() == null ){ // in the future we need ==0 to handle the form
+        if(projectTask.getPriority() == null || projectTask.getPriority() ==0){ // in the future we need ==0 to handle the form
             projectTask.setPriority(3);
         }
         // Initial status when status is null
@@ -70,10 +71,10 @@ public class ProjectTaskService {
         }
 
         ProjectTask projectTask = projectTaskRepository.findByProjectSequence(pt_id);
-        if(projectTask == null) throw new ProjectNotFoundException("Project Task not found");
+        if(projectTask == null) throw new ProjectTaskException("Project Task not found");
 
         if(!projectTask.getProjectIdentifier().equals(backlog_id.toUpperCase())){
-            throw new ProjectNotFoundException("Project Task with sequence: '"+pt_id.toUpperCase()+"' does not exist in Project '"+backlog_id.toUpperCase()+"'");
+            throw new ProjectTaskException("Project Task with sequence: '"+pt_id.toUpperCase()+"' does not exist in Project: '"+backlog_id.toUpperCase()+"'");
         }
 
         return projectTask;
@@ -82,16 +83,12 @@ public class ProjectTaskService {
     public ProjectTask updateByProjectTaskSequence(ProjectTask updatedTask, String backlog_id, String pt_id){
 
         // pt_id can be invalid
-
         // backlog_id can be invalid
-
         // backlog_id and pt_id should be corresponding to each other
-
-
-
-        ProjectTask projectTask = this.findProjectTaskByPTSequence(backlog_id, pt_id);
-
+        ProjectTask projectTask = findProjectTaskByPTSequence(backlog_id, pt_id); // this line of code validate the PT implicitly
         projectTask = updatedTask;
+
+        System.out.println("to be updated project task" + projectTask);
 
         return projectTaskRepository.save(projectTask);
     }

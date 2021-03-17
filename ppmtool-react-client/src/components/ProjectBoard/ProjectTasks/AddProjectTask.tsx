@@ -157,7 +157,7 @@ class AddProjectTask extends React.Component<any, IMyState> {
   }
 }
 
-const mapStateToProps = (state: IMyState) => ({
+const mapStateToProps = (state: any) => ({
   errors: state.errors,
 });
 

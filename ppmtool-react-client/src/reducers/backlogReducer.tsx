@@ -4,6 +4,7 @@ import {
   GET_BACKLOG,
   DELETE_PROJECT_TASK,
 } from "../actions/types";
+import ProjectTask from "../model/ProjectTask";
 
 const initialState = {
   projectTasks: [],
@@ -27,7 +28,10 @@ const backlogReducer = (state = initialState, action: AnyAction) => {
     case DELETE_PROJECT_TASK:
       return {
         ...state,
-        // projectTasks:action.payload
+        projectTasks: state.projectTasks.filter(
+          (projectTask: ProjectTask) =>
+            projectTask.projectSequence !== action.payload
+        ),
       };
 
     default:

@@ -37,6 +37,10 @@ export const getProjects = (history: string[]) => async (dispatch: any) => {
       type: GET_ALLPROJECTS,
       payload: projects.data,
     });
+    dispatch({
+      type: GET_ERRORS,
+      payload: {},
+    });
     history.push("/dashboard");
   } catch (err) {
     console.error(err);
