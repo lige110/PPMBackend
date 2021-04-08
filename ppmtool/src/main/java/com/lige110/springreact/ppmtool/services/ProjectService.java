@@ -26,6 +26,7 @@ public class ProjectService {
             String identifier = project.getProjectIdentifier().toUpperCase();
             project.setProjectIdentifier(identifier);
 
+
             if(project.getId() == null){
                 Backlog backlog = new Backlog();
                 project.setBacklog(backlog);
@@ -36,7 +37,7 @@ public class ProjectService {
                 project.setBacklog(backlogRepository.findByProjectIdentifier(identifier));
             }
 
-            return projectRepository.save(project);
+            return projectRepository.save(project); // judge if the ID already exists here
 
         }catch (Exception e){
             throw new ProjectIdException("Project ID '" + project.getProjectIdentifier().toUpperCase()+"' already exists");
