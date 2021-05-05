@@ -33,13 +33,7 @@ public class Project {
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date updated_At;
 
-    public String getProjectLeader() {
-        return projectLeader;
-    }
 
-    public void setProjectLeader(String projectLeader) {
-        this.projectLeader = projectLeader;
-    }
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")
     @JsonIgnore
@@ -62,6 +56,14 @@ public class Project {
 
     public Project(){
 
+    }
+
+    public String getProjectLeader() {
+        return projectLeader;
+    }
+
+    public void setProjectLeader(String projectLeader) {
+        this.projectLeader = projectLeader;
     }
 
     public Date getCreated_At() {

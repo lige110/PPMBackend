@@ -23,6 +23,7 @@ public class JWTTokenProvider {
         Date now = new Date(System.currentTimeMillis());
 
         Date expiryDate = new Date(now.getTime() + EXPIRATION_TIME);
+        System.out.println("Expiration time"+expiryDate);
 
         String userId = Long.toString(user.getId());
         Map<String, Object> claims = new HashMap<>();

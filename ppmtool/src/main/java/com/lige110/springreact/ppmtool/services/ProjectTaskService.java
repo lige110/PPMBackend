@@ -18,15 +18,17 @@ public class ProjectTaskService {
     private BacklogRepository backlogRepository;
     @Autowired
     private ProjectTaskRepository projectTaskRepository;
+    @Autowired
+    private ProjectService projectService;
 
 
-    public ProjectTask addProjectTask(String projectIdentifier, ProjectTask projectTask){
+    public ProjectTask addProjectTask(String projectIdentifier, ProjectTask projectTask, String username){
         projectIdentifier = projectIdentifier.toUpperCase();
 
         // exceptions project not found
         // PTs to be added to a specific project project != null BL exists
 
-        Backlog backlog = backlogRepository.findByProjectIdentifier(projectIdentifier);
+        Backlog backlog = projectService.findProjectByProjectIdentifier(projectIdentifier,username).getBacklog();
         if(backlog == null){
             throw new ProjectNotFoundException("Project with Identifier '"+ projectIdentifier +"' does not exits");
         }
@@ -54,21 +56,16 @@ public class ProjectTaskService {
         return projectTaskRepository.save(projectTask);
     }
 
-    public Iterable<ProjectTask> findBacklogById(String id){
+    public Iterable<ProjectTask> findBacklogById(String id, String username){
 
-        Backlog backlog = backlogRepository.findByProjectIdentifier(id);
-        if(backlog == null){
-            throw new ProjectNotFoundException("Project with ID: '"+id.toUpperCase()+"' does not exist.");
-        }
+
+        projectService.findProjectByProjectIdentifier(id, username);
 
         return projectTaskRepository.findByProjectIdentifierOrderByPriority(id);
     }
 
-    public ProjectTask findProjectTaskByPTSequence(String backlog_id, String pt_id){
-        Backlog backlog = backlogRepository.findByProjectIdentifier(backlog_id);
-        if(backlog == null){
-            throw new ProjectNotFoundException("Project with ID: '" + backlog_id.toUpperCase()+"' is not found");
-        }
+    public ProjectTask findProjectTaskByPTSequence(String backlog_id, String pt_id, String username){
+        projectService.findProjectByProjectIdentifier(backlog_id, username);
 
         ProjectTask projectTask = projectTaskRepository.findByProjectSequence(pt_id);
         if(projectTask == null) throw new ProjectTaskException("Project Task not found");
@@ -80,12 +77,12 @@ public class ProjectTaskService {
         return projectTask;
     }
 
-    public ProjectTask updateByProjectTaskSequence(ProjectTask updatedTask, String backlog_id, String pt_id){
+    public ProjectTask updateByProjectTaskSequence(ProjectTask updatedTask, String backlog_id, String pt_id, String username){
 
         // pt_id can be invalid
         // backlog_id can be invalid
         // backlog_id and pt_id should be corresponding to each other
-        ProjectTask projectTask = findProjectTaskByPTSequence(backlog_id, pt_id); // this line of code validate the PT implicitly
+        ProjectTask projectTask = findProjectTaskByPTSequence(backlog_id, pt_id,username); // this line of code validate the PT implicitly
         projectTask = updatedTask;
 
         System.out.println("to be updated project task" + projectTask);
@@ -97,9 +94,9 @@ public class ProjectTaskService {
         return projectTaskRepository.findAll();
     }
 
-    public void deleteByProjectSequence(String backlog_id, String pt_id){
+    public void deleteByProjectSequence(String backlog_id, String pt_id, String username){
 
-        ProjectTask projectTask = findProjectTaskByPTSequence(backlog_id,pt_id);
+        ProjectTask projectTask = findProjectTaskByPTSequence(backlog_id,pt_id,username);
 
         projectTaskRepository.delete(projectTask);
     }
