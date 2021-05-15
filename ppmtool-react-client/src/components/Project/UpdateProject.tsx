@@ -61,7 +61,6 @@ class UpdateProject extends React.Component<any, State> {
     const id = this.props.match.params.id;
     this.props.getProjectById(id, this.props.history);
     //   .then(() => this.setState(this.props.project));
-    console.log(this.props.match.params.id);
   }
 
   onChange(
@@ -143,6 +142,7 @@ class UpdateProject extends React.Component<any, State> {
                     type="date"
                     className="form-control form-control-lg"
                     name="start_date"
+                    value={this.state.start_date}
                     onChange={this.onChange}
                   />
                 </div>
@@ -152,6 +152,7 @@ class UpdateProject extends React.Component<any, State> {
                     type="date"
                     className="form-control form-control-lg"
                     name="end_date"
+                    value={this.state.end_date}
                     onChange={this.onChange}
                   />
                 </div>
