@@ -15,7 +15,6 @@ export const createProject =
     dispatch: any
   ) => {
     try {
-      console.log("create projects action dispatched!");
       await axios.post("/api/project", project);
 
       history.push("/dashboard");

@@ -54,7 +54,6 @@ class AddProject extends React.Component<any, IMyComponentState> {
       end_date: this.state.end_date,
     };
 
-    console.log(newProject);
     this.props.createProject(newProject, this.props.history);
   }
 

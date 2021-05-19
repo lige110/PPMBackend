@@ -47,7 +47,7 @@ class AddProjectTask extends React.Component<any, IMyState> {
   // on submit
   onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log("onsubmit fired");
+    // console.log("onsubmit fired");
 
     const newProjectTask: ProjectTask = {
       summary: this.state.summary,
@@ -58,7 +58,7 @@ class AddProjectTask extends React.Component<any, IMyState> {
       projectIdentifier: this.state.projectIdentifier,
     };
 
-    console.log(newProjectTask);
+    // console.log(newProjectTask);
 
     this.props.addProjectTask(
       this.state.projectIdentifier,

@@ -79,7 +79,7 @@ class UpdateProjectTask extends React.Component<any, IMyComponentState> {
       projectSequence: this.state.projectSequence,
     };
 
-    console.log(updatedProjectTask);
+    // console.log(updatedProjectTask);
 
     this.props.updateProjectTask(
       this.state.projectIdentifier,
