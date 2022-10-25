@@ -1,0 +1,28 @@
+# use the Mysql database
+
+spring:
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        dialect: org.hibernate.dialect.PostgreSQL81Dialect
+
+  datasource:
+    url: jdbc:postgresql://localhost:3678/postgres?serverTimezone=Europe/Berlin
+    username: postgres
+    password: postgres
+
+security:
+  ignored: /**
+
+#
+# using the H2 database
+#
+#spring.datasource.url=jdbc:h2:mem:testdb
+#spring.datasource.driverClassName=org.h2.Driver
+#spring.datasource.username=sa
+#spring.datasource.password=
+#spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
