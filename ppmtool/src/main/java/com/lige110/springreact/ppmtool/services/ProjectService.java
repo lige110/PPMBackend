@@ -2,16 +2,17 @@ package com.lige110.springreact.ppmtool.services;
 
 import com.lige110.springreact.ppmtool.domain.Backlog;
 import com.lige110.springreact.ppmtool.domain.Project;
-import com.lige110.springreact.ppmtool.domain.User;
+//import com.lige110.springreact.ppmtool.domain.User;
 import com.lige110.springreact.ppmtool.exceptions.ProjectIdException;
 import com.lige110.springreact.ppmtool.exceptions.ProjectNotFoundException;
 import com.lige110.springreact.ppmtool.repositories.BacklogRepository;
 import com.lige110.springreact.ppmtool.repositories.ProjectRepository;
-import com.lige110.springreact.ppmtool.repositories.UserRepository;
+//import com.lige110.springreact.ppmtool.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.Collection;
 
 @Service
 public class ProjectService {
@@ -23,8 +24,8 @@ public class ProjectService {
     @Autowired
     private BacklogRepository backlogRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+//    @Autowired
+//    private UserRepository userRepository;
 
     public Project saveOrUpdateProject(Project project, String username){
 
@@ -41,10 +42,10 @@ public class ProjectService {
 
         try {
 
-            User user = userRepository.findByUsername(username);
-
-            project.setUser(user);
-            project.setProjectLeader(user.getUsername());
+//            User user = userRepository.findByUsername(username);
+//
+//            project.setUser(user);
+//            project.setProjectLeader(user.getUsername());
 
             String identifier = project.getProjectIdentifier().toUpperCase();
             project.setProjectIdentifier(identifier);
@@ -85,6 +86,10 @@ public class ProjectService {
 
     public Iterable<Project> findAllProjects(String username){
         return projectRepository.findAllByProjectLeader(username);
+    }
+
+    public Collection<Project> fetchAllProjects(){
+        return projectRepository.findAll();
     }
 
     public void deleteProjectByIdentifier(String projectId, String username){

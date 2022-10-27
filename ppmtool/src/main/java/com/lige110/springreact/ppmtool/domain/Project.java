@@ -41,17 +41,17 @@ public class Project {
 
     private String projectLeader;
 
-    public User getUser() {
-        return user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
-    private User user;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JsonIgnore
+//    private User user;
 
 
     public Project(){

@@ -1,6 +1,5 @@
 package com.lige110.springreact.ppmtool.exceptions;
 
-import com.sun.corba.se.spi.ior.ObjectKey;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

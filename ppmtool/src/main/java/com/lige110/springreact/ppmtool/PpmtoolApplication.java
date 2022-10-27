@@ -9,10 +9,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @SpringBootApplication(exclude = ErrorMvcAutoConfiguration.class)
 public class PpmtoolApplication {
 
-    @Bean
-    BCryptPasswordEncoder bCryptPasswordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
+//    @Bean
+//    BCryptPasswordEncoder bCryptPasswordEncoder(){
+//        return new BCryptPasswordEncoder();
+//    }
 
     public static void main(String[] args) {
         SpringApplication.run(PpmtoolApplication.class, args);
