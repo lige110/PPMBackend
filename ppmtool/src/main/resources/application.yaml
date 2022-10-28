@@ -7,16 +7,13 @@ spring:
     properties:
       hibernate:
         hbm2ddl:
-          auto: update
+          auto: create-drop
         dialect: org.hibernate.dialect.PostgreSQL81Dialect
 
   datasource:
     url: jdbc:postgresql://localhost:3678/postgres?serverTimezone=Europe/Berlin
     username: postgres
     password: postgres
-
-security:
-  ignored: /**
 
 #
 # using the H2 database
