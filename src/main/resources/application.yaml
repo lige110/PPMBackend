@@ -7,11 +7,11 @@ spring:
     properties:
       hibernate:
         hbm2ddl:
-          auto: create-drop
+          auto: update
         dialect: org.hibernate.dialect.PostgreSQL81Dialect
 
   datasource:
-    url: jdbc:postgresql://localhost:3678/postgres?serverTimezone=Europe/Berlin
+    url: jdbc:postgresql://${PQ_URL}:5432/postgres?serverTimezone=Europe/Berlin
     username: postgres
     password: postgres
 

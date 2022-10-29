@@ -9,3 +9,12 @@ services:
     ports:
       - "3678:5432"
 
+  ppmbackend:
+    image: ligedocker110/ppmbackend:latest
+    restart: always
+    environment:
+      PQ_URL: database
+    ports:
+      - "8080:8080"
+
+
