@@ -24,7 +24,7 @@ jobs:
       - run:
           name: Build App
           command: |
-            ./gradlew build -x test
+            ./gradlew --no-daemon build -x test
       - run:
           name: Docker build and push
           command: |
