@@ -17,15 +17,16 @@ commands:
 jobs:
   build-and-push:
     docker:
-      - image: cimg/base:2022.10
+      - image: cimg/base:2022.06
     steps:
       - checkout
       - install_correto_jdk
-      - setup_remote_docker
       - run:
           name: Build App
           command: |
             ./gradlew --no-daemon build -x test
+      - setup_remote_docker:
+          version: 20.10.14
       - run:
           name: Docker build and push
           command: |
