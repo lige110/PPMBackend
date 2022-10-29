@@ -17,10 +17,11 @@ commands:
 jobs:
   build-and-push:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/base:2022.10
     steps:
       - checkout
       - install_correto_jdk
+      - setup_remote_docker
       - run:
           name: Build App
           command: |
@@ -48,6 +49,6 @@ jobs:
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  say-hello-workflow:
+  build-and-push:
     jobs:
       - build-and-push
