@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ppmbackend-deployment
+  labels:
+    run: backend
+    app: ppm
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: backend
+      app: ppm
+  template:
+    metadata:
+      labels:
+        run: backend
+        app: ppm
+    spec:
+      containers:
+        - image: ligedocker110/ppmbackend:latest
+          name: ppmbackend
+          ports:
+            - containerPort: 8080
+              name: ppmbackend
+          env:
+            - name: PQ_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-config
+                  key: postgres_url
+

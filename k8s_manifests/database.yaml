@@ -13,8 +13,21 @@ spec:
           name: postgres
       env:
       - name: POSTGRES_USER
-        value: postgres
+        valueFrom:
+          configMapKeyRef:
+            name: db-config
+            key: postgres_username
       - name: POSTGRES_PASSWORD
-        value: postgres
+        valueFrom:
+          configMapKeyRef:
+            name: db-config
+            key: postgres_password
+#      volumeMounts:
+#        - mountPath: /var/lib/postgresql/data
+#          name: postgres-pv-claim
+#  volumes:
+#    - name: postgres-pv-claim
+#      persistentVolumeClaim:
+#        claimName: postgres-pv-claim
   dnsPolicy: ClusterFirst
   restartPolicy: Always

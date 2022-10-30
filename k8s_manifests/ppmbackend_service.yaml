@@ -4,7 +4,8 @@ metadata:
   name: ppmbackend
 spec:
   selector:
-    run: app
+    run: backend
+    app: ppm
   type: NodePort
   ports:
     - port: 8080

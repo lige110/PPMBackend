@@ -1,17 +1,20 @@
-apiVersion: v1
-kind: Pod
-metadata:
-  labels:
-    run: backend
-  name: ppmbackend
-spec:
-  containers:
-    - image: ligedocker110/ppmbackend
-      name: ppmbackend
-      ports:
-        - containerPort: 8080
-          name: ppmbackend
-      env:
-        - name: PQ_URL
-          value: backend-db
-  restartPolicy: Never
+#apiVersion: v1
+#kind: Pod
+#metadata:
+#  labels:
+#    run: backend
+#  name: ppmbackend
+#spec:
+#  containers:
+#    - image: ligedocker110/ppmbackend
+#      name: ppmbackend
+#      ports:
+#        - containerPort: 8080
+#          name: ppmbackend
+#      env:
+#        - name: PQ_URL
+#          valueFrom:
+#            configMapKeyRef:
+#              name: backend-config
+#              key: postgres_url
+#  restartPolicy: Never
