@@ -30,7 +30,7 @@ dependencies {
     runtimeOnly("mysql:mysql-connector-java:8.0.22")
 
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
-    runtimeOnly("org.jetbrains.kotlin:kotlin-reflect:1.6.21")
+    runtimeOnly("org.jetbrains.kotlin:kotlin-reflect:2.1.0")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.google.guava:guava:31.0.1-jre")
 
