@@ -34,7 +34,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.google.guava:guava:31.0.1-jre")
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test:2.4.0")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:3.4.0")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 }
