@@ -26,7 +26,7 @@ dependencies {
     implementation("org.postgresql:postgresql:42.7.4")
 
     runtimeOnly("org.springframework.boot:spring-boot-devtools:2.4.0")
-    runtimeOnly("com.h2database:h2:1.4.200")
+    runtimeOnly("com.h2database:h2:2.3.232")
     runtimeOnly("mysql:mysql-connector-java:8.0.22")
 
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
