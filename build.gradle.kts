@@ -18,7 +18,7 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.4.0")
-    implementation("org.springframework.boot:spring-boot-starter-web:2.4.0")
+    implementation("org.springframework.boot:spring-boot-starter-web:3.4.0")
     implementation("javax.validation:validation-api:2.0.1.Final")
     implementation("org.springframework.boot:spring-boot-starter-validation:2.3.2.RELEASE")
     implementation("com.google.code.gson:gson:2.8.5")
