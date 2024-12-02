@@ -21,7 +21,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web:2.4.0")
     implementation("javax.validation:validation-api:2.0.1.Final")
     implementation("org.springframework.boot:spring-boot-starter-validation:2.3.2.RELEASE")
-    implementation("com.google.code.gson:gson:2.8.5")
+    implementation("com.google.code.gson:gson:2.11.0")
     implementation("io.jsonwebtoken:jjwt:0.9.0")
     implementation("org.postgresql:postgresql:42.7.4")
 
