@@ -23,7 +23,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation:2.3.2.RELEASE")
     implementation("com.google.code.gson:gson:2.12.1")
     implementation("io.jsonwebtoken:jjwt:0.9.0")
-    implementation("org.postgresql:postgresql:42.7.4")
+    implementation("org.postgresql:postgresql:42.7.10")
 
     runtimeOnly("org.springframework.boot:spring-boot-devtools:2.4.0")
     runtimeOnly("com.h2database:h2:1.4.200")
